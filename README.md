@@ -1,26 +1,26 @@
-houdus
+🎲 houdus
 
 A lightweight, zero-dependency Python package for generating random numbers and sequences with a clean, intuitive API.
 
-Features
+✨ Features
 
-🎲 Easy Random Number Generation - Generate random integers and floats with simple function calls
+🎲 Easy Random Generation – Generate random integers and floats with simple function calls.
 
-🔢 Unique Number Sequences - Generate lists of unique random numbers within a range
+🔢 Unique Sequences – Generate lists of unique random numbers within a specific range.
 
-📊 Number Ranges - Create sequences of numbers with custom steps
+📊 Custom Step Ranges – Create sequences of numbers with custom steps.
 
-🔐 Deterministic Results - Set seeds for reproducible random number generation
+🔐 Deterministic Results – Set seeds for completely reproducible random generation.
 
-🚀 Zero Dependencies - Pure Python implementation with no external requirements
+🚀 Zero Dependencies – Pure Python implementation utilizing only the standard library.
 
-💡 Type Hints - Full type annotations for better IDE support and type checking
+💡 Type Hints – Full type annotations for robust IDE support and static type checking.
 
-📦 Lightweight - Minimal package size and memory footprint
+📦 Ultra Lightweight – Minimal package size and memory footprint.
 
-Installation
+⚙️ Installation
 
-Via pip (from PyPI)
+Via pip (Recommended)
 
 pip install houdus
 
@@ -32,136 +32,153 @@ cd houdus
 pip install .
 
 
-Development Installation
+For Development
 
 git clone [https://github.com/redstar-py/houdus.git](https://github.com/redstar-py/houdus.git)
 cd houdus
 pip install -e ".[dev]"
 
 
-Quick Start
+🚀 Quick Start
 
 from houdus import pick_int, pick_float, step_sequence, distinct_ints, assign_seed
 
-# Generate a random integer between 1 and 100 (inclusive)
-print(pick_int(1, 100))  # Output: 42 (example)
+# 1. Generate a random integer between 1 and 100 (inclusive)
+print(pick_int(1, 100))  # Output: 42
 
-# Generate a random float between 0 and 1
-print(pick_float(0.0, 1.0))  # Output: 0.8739... (example)
+# 2. Generate a random float between 0.0 and 1.0
+print(pick_float(0.0, 1.0))  # Output: 0.8739...
 
-# Generate a list of 5 unique numbers between 1 and 50
-print(distinct_ints(5, 1, 50))  # Output: [3, 15, 42, 28, 7] (example)
+# 3. Generate a list of 5 unique numbers between 1 and 50
+print(distinct_ints(5, 1, 50))  # Output: [3, 15, 42, 28, 7]
 
-# Generate a sequence of numbers from 1 to 10 with step 2
+# 4. Generate a sequence of numbers from 1 to 10 with step 2
 print(step_sequence(1, 11, 2))  # Output: [1, 3, 5, 7, 9]
 
-# Set a seed for deterministic/reproducible results
+# 5. Set a seed for deterministic/reproducible results
 assign_seed(42)
 print(pick_int(1, 100))  # Always outputs the same number
-assign_seed(42)
-print(pick_int(1, 100))  # Outputs the same number again
 
 
-API Reference
+📚 API Reference
+
+Quick Lookup
+
+Function
+
+Return Type
+
+Description
+
+pick_int(min_val, max_val)
+
+int
+
+Random integer within a range (inclusive).
+
+pick_float(min_val, max_val)
+
+float
+
+Random float within a range.
+
+step_sequence(start, stop, step)
+
+List[int]
+
+Sequential list with custom steps (exclusive stop).
+
+distinct_ints(count, min_val, max_val)
+
+List[int]
+
+Unique random integers without duplicates.
+
+assign_seed(seed)
+
+None
+
+Set the seed for deterministic results.
+
+select_item(sequence)
+
+Any
+
+Pick a random single item from a sequence.
+
+select_items(sequence, k)
+
+List[Any]
+
+Pick k items with replacement (duplicates allowed).
+
+mix_inplace(sequence)
+
+None
+
+Shuffle a list in-place (modifies original).
+
+mixed_copy(sequence)
+
+List[Any]
+
+Return a shuffled copy (leaves original intact).
+
+generate_text(length, charset)
+
+str
+
+Generate a random alphanumeric or custom string.
+
+secure_password(length, use_special)
+
+str
+
+Generate a cryptographically secure random password.
+
+pick_weighted(items, weights)
+
+Any
+
+Select an item based on relative probability weights.
+
+batch_ints(count, min_val, max_val)
+
+List[int]
+
+Optimized batch generation of random integers.
+
+batch_floats(count, min_val, max_val)
+
+List[float]
+
+Optimized batch generation of random floats.
+
+🎲 Core Random Generation
 
 pick_int(min_val: int, max_val: int) -> int
 
 Generate a random integer between min_val and max_val (inclusive).
 
-Parameters:
-
-min_val (int): Minimum value (inclusive)
-
-max_val (int): Maximum value (inclusive)
-
-Returns: int - A random integer within the specified range
-
-Raises: ValueError - If min_val > max_val
-
-Example:
+Raises: ValueError if min_val > max_val.
 
 from houdus import pick_int
-
-die_roll = pick_int(1, 6)  # Simulates rolling a die
+die_roll = pick_int(1, 6)
 
 
 pick_float(min_val: float, max_val: float) -> float
 
 Generate a random float between min_val and max_val.
 
-Parameters:
-
-min_val (float): Minimum value
-
-max_val (float): Maximum value
-
-Returns: float - A random float within the specified range
-
-Raises: ValueError - If min_val > max_val
-
-Example:
+Raises: ValueError if min_val > max_val.
 
 from houdus import pick_float
-
-temperature = pick_float(20.0, 25.0)  # Random temperature
-
-
-step_sequence(start: int, stop: int, step: int = 1) -> List[int]
-
-Generate a list of numbers from start to stop (exclusive) with a given step.
-
-Parameters:
-
-start (int): Starting value (inclusive)
-
-stop (int): Ending value (exclusive)
-
-step (int): Step between values (default: 1)
-
-Returns: List[int] - A list of integers in the specified range
-
-Example:
-
-from houdus import step_sequence
-
-evens = step_sequence(0, 10, 2)  # [0, 2, 4, 6, 8]
-odds = step_sequence(1, 10, 2)   # [1, 3, 5, 7, 9]
-
-
-distinct_ints(count: int, min_val: int, max_val: int) -> List[int]
-
-Generate a list of count unique random integers within the range [min_val, max_val].
-
-Parameters:
-
-count (int): Number of unique integers to generate
-
-min_val (int): Minimum value (inclusive)
-
-max_val (int): Maximum value (inclusive)
-
-Returns: List[int] - A list of unique random integers
-
-Raises: ValueError - If count > (max_val - min_val + 1)
-
-Example:
-
-from houdus import distinct_ints
-
-lottery_numbers = distinct_ints(6, 1, 49)  # Pick 6 unique numbers from 1 to 49
+temperature = pick_float(20.0, 25.0)
 
 
 assign_seed(seed: Union[int, float, str, bytes, bytearray]) -> None
 
-Set the seed for the random number generator to produce deterministic/reproducible results.
-
-Parameters:
-
-seed: A seed value (int, float, str, bytes, or bytearray)
-
-Returns: None
-
-Example:
+Set the global seed for the random number generator to ensure fully reproducible results.
 
 from houdus import assign_seed, pick_int
 
@@ -174,306 +191,136 @@ second_run = pick_int(1, 1000)
 assert first_run == second_run  # Always True
 
 
+🔢 Sequences & Shuffling
+
+step_sequence(start: int, stop: int, step: int = 1) -> List[int]
+
+Generate a predictable list of numbers from start (inclusive) to stop (exclusive) incremented by step.
+
+from houdus import step_sequence
+evens = step_sequence(0, 10, 2)  # [0, 2, 4, 6, 8]
+
+
+distinct_ints(count: int, min_val: int, max_val: int) -> List[int]
+
+Generate a list of count unique random integers within the range [min_val, max_val].
+
+Raises: ValueError if requested count is greater than the available range.
+
+from houdus import distinct_ints
+lottery_numbers = distinct_ints(6, 1, 49)
+
+
 select_item(sequence: Sequence[Any]) -> Any
 
-Select a random element from a non-empty sequence.
-
-Parameters:
-
-sequence: Any sequence (list, tuple, string, etc.)
-
-Returns: Any - A random element from the sequence
-
-Raises: ValueError - If sequence is empty
-
-Example:
+Select a single random element from a non-empty sequence.
 
 from houdus import select_item
-
 card = select_item(['Hearts', 'Diamonds', 'Clubs', 'Spades'])
-element = select_item([1, 2, 3, 4, 5])
 
 
 select_items(sequence: Sequence[Any], k: int = 1) -> List[Any]
 
 Select k random elements from a sequence with replacement (allows duplicates).
 
-Parameters:
-
-sequence: Any sequence
-
-k (int): Number of elements to select (default: 1)
-
-Returns: List[Any] - A list of k random elements
-
-Raises: ValueError - If sequence is empty or k is negative
-
-Example:
-
 from houdus import select_items
-
-# Rolling a die 10 times
 rolls = select_items([1, 2, 3, 4, 5, 6], k=10)
-
-# Random colors with replacement
-colors = select_items(['red', 'blue', 'green'], k=5)
 
 
 mix_inplace(sequence: List[Any]) -> None
 
-Shuffle a list in-place using the Fisher-Yates algorithm (modifies original list).
+Shuffle a list in-place using the Fisher-Yates algorithm.
 
-Parameters:
-
-sequence: A list to shuffle (must be a list, not tuple or other sequences)
-
-Returns: None (modifies list in-place)
-
-Raises: TypeError - If sequence is not a list
-
-Example:
+⚠️ Warning: This modifies the original list object and requires a mutable List.
 
 from houdus import mix_inplace
-
 deck = [1, 2, 3, 4, 5]
-mix_inplace(deck)
-print(deck)  # [3, 1, 5, 2, 4] (shuffled in-place)
+mix_inplace(deck)  # deck is now mutated (e.g., [3, 1, 5, 2, 4])
 
 
 mixed_copy(sequence: Sequence[Any]) -> List[Any]
 
-Return a shuffled copy of a sequence without modifying the original.
-
-Parameters:
-
-sequence: Any sequence
-
-Returns: List[Any] - A shuffled copy of the sequence
-
-Example:
+Return a completely shuffled copy of a sequence without modifying the original.
 
 from houdus import mixed_copy
-
 original = [1, 2, 3, 4, 5]
-shuffled_copy = mixed_copy(original)
-print(original)      # [1, 2, 3, 4, 5] (unchanged)
-print(shuffled_copy) # [3, 1, 5, 2, 4] (shuffled)
+shuffled = mixed_copy(original)  # original remains unchanged
 
+
+🔐 Strings & Security
 
 generate_text(length: int = 10, charset: str = ...) -> str
 
-Generate a random string of specified length using alphanumeric characters (or custom charset).
-
-Parameters:
-
-length (int): Length of the string (default: 10)
-
-charset (str): Characters to use for generation (default: letters + digits)
-
-Returns: str - A random string
-
-Raises: ValueError - If length is negative or charset is empty
-
-Example:
+Generate a random string of a specified length using alphanumeric characters or a custom charset.
 
 from houdus import generate_text
-
-code = generate_text(8)           # 'aBc3DeF2'
-token = generate_text(32)         # Random 32-char token
-custom = generate_text(5, 'ABCD') # Random 5-char from ABCD
+hex_token = generate_text(32, charset="abcdef0123456789")
 
 
 secure_password(length: int = 16, use_special: bool = True) -> str
 
 Generate a secure random password with mixed character types.
 
-Parameters:
-
-length (int): Password length (default: 16, minimum: 4)
-
-use_special (bool): Include special characters (default: True)
-
-Returns: str - A secure random password
-
-Raises: ValueError - If length < 4
-
-Example:
+Raises: ValueError if length < 4.
 
 from houdus import secure_password
+password = secure_password(20, use_special=True)
 
-# Generate a strong password
-password = secure_password(20)  # 'xK#9mL$pQ@2bF!vRnT8J'
 
-# Generate alphanumeric-only password
-simple_password = secure_password(12, use_special=False)  # 'xK9mLpQ2bFvRn'
-
+📊 Advanced & Batch Operations
 
 pick_weighted(items: Sequence[Any], weights: Sequence[float]) -> Any
 
-Select a random item based on relative weights (probability).
-
-Parameters:
-
-items: Sequence of items to choose from
-
-weights: Sequence of weights (probabilities) for each item
-
-Returns: Any - A randomly selected item
-
-Raises: ValueError - If items/weights empty, mismatched lengths, or sum of weights ≤ 0
-
-Example:
+Select a random item based on relative probability distributions.
 
 from houdus import pick_weighted
-
-# Weighted dice (biased toward higher numbers)
-roll = pick_weighted([1, 2, 3, 4, 5, 6], [1, 1, 1, 2, 2, 3])
-
-# Weighted selection
-loot = pick_weighted(
-    ['common', 'rare', 'legendary'],
-    [0.7, 0.25, 0.05]
-)
+loot = pick_weighted(['common', 'rare', 'legendary'], [0.70, 0.25, 0.05])
 
 
 batch_ints(count: int, min_val: int, max_val: int) -> List[int]
 
-Generate a list of random integers (batch operation).
-
-Parameters:
-
-count (int): Number of integers to generate
-
-min_val (int): Minimum value (inclusive)
-
-max_val (int): Maximum value (inclusive)
-
-Returns: List[int] - List of random integers
-
-Raises: ValueError - If count is negative or invalid range
-
-Example:
+Efficiently generate a batch list of random integers.
 
 from houdus import batch_ints
-
-# Generate 10 random test values
-test_data = batch_ints(10, 1, 100)
-
-# Simulate 100 coin flips (1 = heads, 0 = tails)
-flips = batch_ints(100, 0, 1)
+coin_flips = batch_ints(100, 0, 1)  # 100 results of 0 or 1
 
 
 batch_floats(count: int, min_val: float, max_val: float) -> List[float]
 
-Generate a list of random floats (batch operation).
-
-Parameters:
-
-count (int): Number of floats to generate
-
-min_val (float): Minimum value
-
-max_val (float): Maximum value
-
-Returns: List[float] - List of random floats
-
-Raises: ValueError - If count is negative or invalid range
-
-Example:
+Efficiently generate a batch list of random floats.
 
 from houdus import batch_floats
-
-# Generate 100 random coordinates
-x_coords = batch_floats(100, 0.0, 100.0)
-y_coords = batch_floats(100, 0.0, 100.0)
-
-# Generate random temperatures
-temps = batch_floats(30, 15.0, 35.0)  # 30 days of temperature
+x_coords = batch_floats(1000, 0.0, 100.0)
 
 
-Use Cases
+💡 Practical Use Cases
 
-Games & Simulations
+from houdus import pick_int, select_item, pick_weighted
 
-from houdus import pick_int, distinct_ints, select_item, mixed_copy, pick_weighted
+# Simulate a standard D&D D20 roll
+d20_roll = pick_int(1, 20)
 
-# Dice roll
-roll = pick_int(1, 6)
+# Randomly select NPC dialogue suit
+npc_mood = select_item(['Friendly', 'Hostile', 'Neutral'])
 
-# Card shuffling (picking 5 unique cards from 52)
-cards = distinct_ints(5, 1, 52)
-
-# Random card suit
-suit = select_item(['♠', '♥', '♦', '♣'])
-
-# Shuffle a deck of cards
-deck = list(range(1, 53))
-shuffled_deck = mixed_copy(deck)
-
-# Weighted loot drop (rarer items less likely)
-loot = pick_weighted(['common', 'rare', 'epic', 'legendary'], [0.6, 0.25, 0.12, 0.03])
+# Enemy item drop rate calculation
+dropped_item = pick_weighted(
+    ['Gold Coin', 'Health Potion', 'Mythic Sword'], 
+    [0.80, 0.18, 0.02]
+)
 
 
-Testing & Quality Assurance
+from houdus import assign_seed, batch_ints, generate_text
 
-from houdus import assign_seed, pick_int, batch_ints, secure_password
+# Reproducible test environments
+assign_seed("mock_user_pipeline")
+mock_user_ages = batch_ints(50, 18, 65)
 
-# Reproducible test scenarios
-assign_seed("test_scenario_001")
-test_data = batch_ints(10, 1, 100)  # Batch generation
-
-# Generate test user passwords
-test_passwords = [secure_password(12) for _ in range(5)]
+# Session key generation
+test_session_tokens = [generate_text(32) for _ in range(5)]
 
 
-Data Generation
-
-from houdus import pick_float, batch_floats, step_sequence, generate_text
-
-# Generate sample coordinates efficiently
-x_coords = batch_floats(100, 0, 100)
-y_coords = batch_floats(100, 0, 100)
-coordinates = list(zip(x_coords, y_coords))
-
-# Generate batch IDs
-batch_ids = step_sequence(1000, 1100)  # 1000 sequential IDs
-
-# Generate random test tokens
-tokens = [generate_text(32) for _ in range(10)]
-
-
-Security & Authentication
-
-from houdus import secure_password, generate_text
-
-# Generate secure passwords for users
-user_password = secure_password(20, use_special=True)
-
-# Generate secure API tokens
-api_token = generate_text(64, 'abcdef0123456789')  # Hex string
-
-# Generate secure session IDs
-session_id = generate_text(32)
-
-
-Shuffling & Randomization
-
-from houdus import mix_inplace, mixed_copy, select_item, select_items
-
-# Shuffle survey questions to avoid bias
-questions = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5']
-shuffled_questions = mixed_copy(questions)
-
-# Random playlist order
-playlist = ['song1', 'song2', 'song3', 'song4', 'song5']
-mix_inplace(playlist)
-print(f"Playing: {select_item(playlist)}")
-
-# Batch sampling with replacement
-samples = select_items(range(1, 100), k=50)
-
-
-Development
+🛠️ Development & Contribution
 
 Prerequisites
 
@@ -483,118 +330,25 @@ pip or poetry
 
 Setup Development Environment
 
-# Clone the repository
-git clone [https://github.com/yourusername/houdus.git](https://github.com/yourusername/houdus.git)
+# Clone and enter the repository
+git clone [https://github.com/redstar-py/houdus.git](https://github.com/redstar-py/houdus.git)
 cd houdus
 
-# Create a virtual environment
+# Create and activate a virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\\Scripts\\activate
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
 
 # Install development dependencies
 pip install -e ".[dev]"
 
 
-Running Tests
+Running Tests & Coverage
 
-# Run all tests
+# Run all unit tests
 pytest
-
-# Run tests with coverage
-pytest --cov=houdus
 
 # Run tests with verbose output
 pytest -v
 
-
-Code Quality
-
-# Format code with Black
-black src/ tests/
-
-# Sort imports with isort
-isort src/ tests/
-
-# Lint with flake8
-flake8 src/ tests/
-
-# Type checking with mypy
-mypy src/
-
-
-Testing
-
-The project uses pytest for testing. All functions are covered with comprehensive unit tests.
-
-# Run tests
-pytest
-
-# Run specific test file
-pytest tests/test_generator.py
-
-# Run specific test function
-pytest tests/test_generator.py::test_pick_int
-
-# Run with coverage report
+# Generate a test coverage report
 pytest --cov=houdus --cov-report=html
-
-
-Performance
-
-Houdus is lightweight and performant:
-
-No external dependencies - Pure Python with standard library only
-
-Minimal overhead - Simple wrapper around Python's built-in random module
-
-Small memory footprint - Minimal package size
-
-Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-Fork the repository
-
-Create your feature branch (git checkout -b feature/AmazingFeature)
-
-Commit your changes (git commit -m 'Add some AmazingFeature')
-
-Push to the branch (git origin feature/AmazingFeature)
-
-Open a Pull Request
-
-Guidelines
-
-Follow PEP 8 style guide
-
-Use Black for code formatting
-
-Add tests for any new functionality
-
-Update documentation as needed
-
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-Support
-
-If you encounter any issues or have questions:
-
-Check the GitHub Issues
-
-Create a new issue with a clear description
-
-Include Python version and relevant code snippets
-
-Changelog
-
-See RELEASES for version history and changes.
-
-Acknowledgments
-
-Built with Python's standard library
-
-Inspired by the need for a simple, lightweight random number generation utility
-
-Made with ❤️ by the Houdus Team
