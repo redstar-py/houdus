@@ -27,14 +27,14 @@ pip install houdus
 
 From Source
 
-git clone [https://github.com/yourusername/houdus.git](https://github.com/yourusername/houdus.git)
+git clone [https://github.com/redstar-py/houdus.git](https://github.com/redstar-py/houdus.git)
 cd houdus
 pip install .
 
 
 Development Installation
 
-git clone [https://github.com/yourusername/houdus.git](https://github.com/yourusername/houdus.git)
+git clone [https://github.com/redstar-py/houdus.git](https://github.com/redstar-py/houdus.git)
 cd houdus
 pip install -e ".[dev]"
 
